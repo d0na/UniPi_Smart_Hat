@@ -1,0 +1,88 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "who",
+						"type": "address"
+					}
+				],
+				"name": "getExamsState",
+				"outputs": [
+					{
+						"internalType": "enum Gestione_Esami.examState",
+						"name": "_exam1",
+						"type": "uint8"
+					},
+					{
+						"internalType": "enum Gestione_Esami.examState",
+						"name": "_exam2",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "graduated",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/Gestione_Esami.sol": "Gestione_Esami"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/Gestione_Esami.sol": {
+			"keccak256": "0x7c5bc300729c5e5b302fda823ea70e9a9936ff31271ad52fe824c139f6987662",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9307cce0f5847add16b5a83bab295fd18a1c84ee17ba51796fea346cad1f292f",
+				"dweb:/ipfs/QmS4BZZqic7QbyPWNPszcD6fLuMUrRNi8Xvu1H9FyozZki"
+			]
+		}
+	},
+	"version": 1
+}

@@ -1,0 +1,66 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "aggiungi_spilla",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/Smart_Hat.sol": "Smart_Hat"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/Gestione_Esami.sol": {
+			"keccak256": "0x8eadcfecc2e9eff7efc0cb07d11572da20257ef603bff6ac7e06989f2c894d06",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b3731b4ed09fc2632f5574792ab698129e3a62778116b1757818e6f4b44d9dbe",
+				"dweb:/ipfs/QmfBbLTh9Be1V3GuUrVEpGTghiz8FZxDH8gPAzhdDv5NeS"
+			]
+		},
+		"contracts/Smart_Hat.sol": {
+			"keccak256": "0xed6fcf4f2b72377dd7892e9cefd9fca1c497b8b51467c12c310d6c23e6133bf3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fdd6e61ca0ae61a90bee9a2671593d1d73f0e021c525d19973fafb0f3a78ca2a",
+				"dweb:/ipfs/QmNhu4g8c9KXc6uUd8Sok3BVF462jXboiwJQ2ptA7ZMjYH"
+			]
+		}
+	},
+	"version": 1
+}
