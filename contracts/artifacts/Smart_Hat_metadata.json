@@ -16,6 +16,24 @@
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "crea_cappellino",
+				"outputs": [
+					{
+						"internalType": "enum Gestione_Esami.examState",
+						"name": "_e1",
+						"type": "uint8"
+					},
+					{
+						"internalType": "enum Gestione_Esami.examState",
+						"name": "_e2",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -46,19 +64,19 @@
 	},
 	"sources": {
 		"contracts/Gestione_Esami.sol": {
-			"keccak256": "0x8eadcfecc2e9eff7efc0cb07d11572da20257ef603bff6ac7e06989f2c894d06",
+			"keccak256": "0x9ab5067887b8efdc38b51a8e941ffe655912a43836c7ec5aa56f549e0d8cd84f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://b3731b4ed09fc2632f5574792ab698129e3a62778116b1757818e6f4b44d9dbe",
-				"dweb:/ipfs/QmfBbLTh9Be1V3GuUrVEpGTghiz8FZxDH8gPAzhdDv5NeS"
+				"bzz-raw://a900b801b7827be62be7d0a0e38c8fb2d8bbf80abaf4096cf81b4bad1ab3a1ac",
+				"dweb:/ipfs/QmTkYy4WEPXwZGHi9csaqyCtnv2Z4QAgjZRbb26kDTSqDv"
 			]
 		},
 		"contracts/Smart_Hat.sol": {
-			"keccak256": "0xed6fcf4f2b72377dd7892e9cefd9fca1c497b8b51467c12c310d6c23e6133bf3",
+			"keccak256": "0xb3f457e83b81001f20462fb77e2896b45d8d81d7eff62c1e60186b900663f9a1",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://fdd6e61ca0ae61a90bee9a2671593d1d73f0e021c525d19973fafb0f3a78ca2a",
-				"dweb:/ipfs/QmNhu4g8c9KXc6uUd8Sok3BVF462jXboiwJQ2ptA7ZMjYH"
+				"bzz-raw://63f3680913fd2832dfdcb77256111081f7826e74b3317532022fa13d5eaf317a",
+				"dweb:/ipfs/QmdGRL7p8ox78tMiK4pBLXnqTscdWFRq9GYfz6bGeiKXP9"
 			]
 		}
 	},
