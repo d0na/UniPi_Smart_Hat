@@ -17,6 +17,7 @@ contract Gestione_Esami is Ownable {
         planned_exams.push("245AA");
     }
 
+    //-----Funzioni per la gestione ed il controllo del superamento degli esami-----
     function getExamState(address who,string memory examCode) public view returns (examState) {
         //Controllo codice esame
         require(checkExamCode(examCode),"Unknown exam code");
@@ -36,6 +37,24 @@ contract Gestione_Esami is Ownable {
         exams[examCode][who]=assestment;
     }
 
+    function getMyExamState(string memory examCode) public view returns (examState){
+        return getExamState(msg.sender, examCode);
+    }
+    
+    function getMySituation() public view returns (examState[] memory, bool){
+        return getSituation(msg.sender);
+    }
+
+    function getSituation(address who) public view onlyOwner returns (examState[] memory, bool){
+        examState[] memory results = new examState[](planned_exams.length);
+        for(uint i=0;i<planned_exams.length;i++){
+            results[i]=exams[planned_exams[i]][who];
+        }
+        bool _graduated=isGraduated(who);
+        return (results,_graduated);
+    }
+    
+    //-----Funzioni per la gestione ed il controllo delle lauree-----
     function publishGraduation(address who) public onlyOwner {
         require(!graduated[who],"The student is already graduated");
         for(uint i=0;i<planned_exams.length;i++){
@@ -45,10 +64,15 @@ contract Gestione_Esami is Ownable {
         graduated[who]=true;
     }
 
-    function getMyExamState(string memory examCode) public view returns (examState){
-        return getExamState(msg.sender, examCode);
+    function isGraduated(address who) public view returns (bool){
+        return graduated[who];
     }
-    
+
+    //-----Gestione degli esami previsti per la laurea-----
+    function getExamList() public view returns (string[] memory){
+        return planned_exams;
+    }
+
     function addExam(string memory examCode) public onlyOwner{
         require(!checkExamCode(examCode),"Exam already added");
         planned_exams.push(examCode);
@@ -61,9 +85,5 @@ contract Gestione_Esami is Ownable {
             } 
         }
         return false;
-    }
-
-    function isGraduated(address who) public view returns (bool){
-        return graduated[who];
     }
 }

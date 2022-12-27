@@ -66,6 +66,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "getExamList",
+				"outputs": [
+					{
+						"internalType": "string[]",
+						"name": "",
+						"type": "string[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -103,6 +116,48 @@
 						"internalType": "enum Gestione_Esami.examState",
 						"name": "",
 						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getMySituation",
+				"outputs": [
+					{
+						"internalType": "enum Gestione_Esami.examState[]",
+						"name": "",
+						"type": "uint8[]"
+					},
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "who",
+						"type": "address"
+					}
+				],
+				"name": "getSituation",
+				"outputs": [
+					{
+						"internalType": "enum Gestione_Esami.examState[]",
+						"name": "",
+						"type": "uint8[]"
+					},
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
 					}
 				],
 				"stateMutability": "view",
@@ -212,11 +267,11 @@
 	},
 	"sources": {
 		"contracts/Gestione_Esami.sol": {
-			"keccak256": "0xc8c47460087d27b5814f93e7306e52c656d777442b344b80d58821ee17843e18",
+			"keccak256": "0x7974cfdac47980ed098c5e54ca98d9e536e1ea74a7bda224bdcd586a5ddd3b34",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://50ebfc99a120cc55fe81e38382d270dedbc9a8122d4d7dad8b4084fe80a7f632",
-				"dweb:/ipfs/QmSQxwuZLW3spberBHscV5cnGifm3vHFTeBDPsAEtkJvHZ"
+				"bzz-raw://ca071a4ae5b90419611c6cc8a38d099904ae6d11625be0d8b86f103c51c5c2df",
+				"dweb:/ipfs/QmZmG3UttUnhqqBRDF4rBB6CHRwj4DzAT6pkChh8N1iaij"
 			]
 		},
 		"hardhat/console.sol": {
