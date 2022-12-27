@@ -11,34 +11,97 @@
 				"type": "constructor"
 			},
 			{
-				"inputs": [],
-				"name": "aggiungi_spilla",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
 			},
 			{
 				"inputs": [],
 				"name": "crea_cappellino",
 				"outputs": [
 					{
-						"internalType": "enum Gestione_Esami.examState",
-						"name": "_e1",
-						"type": "uint8"
-					},
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
 					{
-						"internalType": "enum Gestione_Esami.examState",
-						"name": "_e2",
-						"type": "uint8"
+						"internalType": "address",
+						"name": "",
+						"type": "address"
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "manager",
+						"type": "address"
+					}
+				],
+				"name": "setManager",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			}
 		],
 		"devdoc": {
 			"kind": "dev",
-			"methods": {},
+			"methods": {
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+				}
+			},
 			"version": 1
 		},
 		"userdoc": {
@@ -63,20 +126,36 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/Gestione_Esami.sol": {
-			"keccak256": "0x9ab5067887b8efdc38b51a8e941ffe655912a43836c7ec5aa56f549e0d8cd84f",
+		"contracts/Smart_Hat.sol": {
+			"keccak256": "0x21aadb5f0f13dad860cba4d72f8da32fd9da92b870a588de4a79fb1fbc7e6713",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a900b801b7827be62be7d0a0e38c8fb2d8bbf80abaf4096cf81b4bad1ab3a1ac",
-				"dweb:/ipfs/QmTkYy4WEPXwZGHi9csaqyCtnv2Z4QAgjZRbb26kDTSqDv"
+				"bzz-raw://6a457f97dab9bd4e2dc7a0d807b7ad6f0510ae325022275f7ff7e820a9409544",
+				"dweb:/ipfs/QmW2kZLvm87xQxNwawZD2qRLgAeXquestPJ6gGaR8TYDn5"
 			]
 		},
-		"contracts/Smart_Hat.sol": {
-			"keccak256": "0xb3f457e83b81001f20462fb77e2896b45d8d81d7eff62c1e60186b900663f9a1",
+		"hardhat/console.sol": {
+			"keccak256": "0x60b0215121bf25612a6739fb2f1ec35f31ee82e4a8216c032c8243d904ab3aa9",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://63f3680913fd2832dfdcb77256111081f7826e74b3317532022fa13d5eaf317a",
-				"dweb:/ipfs/QmdGRL7p8ox78tMiK4pBLXnqTscdWFRq9GYfz6bGeiKXP9"
+				"bzz-raw://6e29880d33dd479bb046ba306993d26ccb779a4b1d94a046cb3567f22948bb4d",
+				"dweb:/ipfs/QmfTY1qzPt5C63Wc7y6JqfZr5899NRvXYdCpyLzR5FXQic"
+			]
+		},
+		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol": {
+			"keccak256": "0xa94b34880e3c1b0b931662cb1c09e5dfa6662f31cba80e07c5ee71cd135c9673",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://40fb1b5102468f783961d0af743f91b9980cf66b50d1d12009f6bb1869cea4d2",
+				"dweb:/ipfs/QmYqEbJML4jB1GHbzD4cUZDtJg5wVwNm3vDJq1GbyDus8y"
+			]
+		},
+		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Context.sol": {
+			"keccak256": "0xe2e337e6dde9ef6b680e07338c493ebea1b5fd09b43424112868e9cc1706bca7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6df0ddf21ce9f58271bdfaa85cde98b200ef242a05a3f85c2bc10a8294800a92",
+				"dweb:/ipfs/QmRK2Y5Yc6BK7tGKkgsgn3aJEQGi5aakeSPZvS65PV8Xp3"
 			]
 		}
 	},
