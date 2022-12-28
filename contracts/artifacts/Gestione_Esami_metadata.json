@@ -267,11 +267,11 @@
 	},
 	"sources": {
 		"contracts/Gestione_Esami.sol": {
-			"keccak256": "0x7974cfdac47980ed098c5e54ca98d9e536e1ea74a7bda224bdcd586a5ddd3b34",
+			"keccak256": "0x7e9cc11d59eb6f6113db1187c0a6157fe0fb634aef14a80b111b9fe719ab839e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://ca071a4ae5b90419611c6cc8a38d099904ae6d11625be0d8b86f103c51c5c2df",
-				"dweb:/ipfs/QmZmG3UttUnhqqBRDF4rBB6CHRwj4DzAT6pkChh8N1iaij"
+				"bzz-raw://3a166aa76745b46694be576fbe4cf768bc642ed659ed491cd59cb241b61892b0",
+				"dweb:/ipfs/QmXw24XKgwcLDLo2pE1yUpMYboKEefsvfatmut19Euw1hz"
 			]
 		},
 		"hardhat/console.sol": {

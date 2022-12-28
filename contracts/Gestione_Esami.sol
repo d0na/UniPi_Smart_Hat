@@ -45,7 +45,7 @@ contract Gestione_Esami is Ownable {
         return getSituation(msg.sender);
     }
 
-    function getSituation(address who) public view onlyOwner returns (examState[] memory, bool){
+    function getSituation(address who) public view returns (examState[] memory, bool){
         examState[] memory results = new examState[](planned_exams.length);
         for(uint i=0;i<planned_exams.length;i++){
             results[i]=exams[planned_exams[i]][who];
@@ -86,4 +86,5 @@ contract Gestione_Esami is Ownable {
         }
         return false;
     }
+
 }

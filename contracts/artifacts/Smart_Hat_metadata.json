@@ -34,6 +34,11 @@
 				"name": "crea_cappellino",
 				"outputs": [
 					{
+						"internalType": "enum Smart_Hat.exams_Situation",
+						"name": "",
+						"type": "uint8"
+					},
+					{
 						"internalType": "bool",
 						"name": "",
 						"type": "bool"
@@ -127,11 +132,11 @@
 	},
 	"sources": {
 		"contracts/Smart_Hat.sol": {
-			"keccak256": "0x21aadb5f0f13dad860cba4d72f8da32fd9da92b870a588de4a79fb1fbc7e6713",
+			"keccak256": "0xbb278e6a50dd4ba0c1e652ad76e4540acfa6e4fe30c28276f5d5ff3a6971e8d7",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://6a457f97dab9bd4e2dc7a0d807b7ad6f0510ae325022275f7ff7e820a9409544",
-				"dweb:/ipfs/QmW2kZLvm87xQxNwawZD2qRLgAeXquestPJ6gGaR8TYDn5"
+				"bzz-raw://c1838125e9fdd59fea2392d2d5ed8610d56174b41bb9e6b300c89be0a07c433a",
+				"dweb:/ipfs/QmbFghu6f7Xw9ToRe3ixMMMia6TE99SzMeNZL98HVYewor"
 			]
 		},
 		"hardhat/console.sol": {
