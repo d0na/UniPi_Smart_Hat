@@ -4,15 +4,23 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contr
 import "hardhat/console.sol";
 
 contract Smart_Hat is Ownable{
+    //Costanti relative agli esami supportati dal sistema degli Smart_Hat
+    string constant ComputerNetworks = "274AA";
+    string constant Cryptography = "245AA";
+
     //Riferimento al contratto utilizzato da UniPi per caricare gli esami superati e le lauree conseguite
     address managerContract;
 
     //Stato del cappellino
     enum exams_Situation{NO_EXAMS, NETWORK_STD, NETWORK_MERIT, CRYPTO_STD, CRYPTO_MERIT, NETWORK_STD_CRYPTO_STD, NETWORK_STD_CRYPTO_MERIT, NETWORK_MERIT_CRYPTO_STD, NETWORK_MERIT_CRYPTO_MERIT, OTHER_CONFIG}
-    bool graduatedVersion=false;
-    exams_Situation state=exams_Situation.NO_EXAMS;
+    bool public graduatedVersion=false;
+    bool initialized=false;
+    exams_Situation public state=exams_Situation.NO_EXAMS;
 
-    constructor() {
+    //-----Construttore e funzione per la gestione dell'indirizzo del contratto manager degli esami
+    constructor(address manager){
+        require(manager == address(manager),"Invalid manager contract address");
+        managerContract=manager;
     }
 
     function setManager(address manager) public onlyOwner {
@@ -20,20 +28,24 @@ contract Smart_Hat is Ownable{
         managerContract=manager;
     }
 
+    //-----Gestione degli stati del cappellino-----
+
+    /***
+        @notice Crea il cappellino considerando anche dagli esami già sostenuti dall'utente.
+            Solo il creatore del cappellino può chiamare questa funzione.
+        @return La situazione degli esami finora sostenuti ed un booleano che indica se 
+            lo studente è laureato.
+    ***/
     function crea_cappellino() public onlyOwner returns (exams_Situation, bool) {
-        //Otteniamo lo stato degli esami dell'indirizzo chiamante
+        require(!initialized,"Hat already initialized");
+        //Ottengo lo stato degli esami dell'indirizzo chiamante
         bytes4 selector=bytes4(keccak256("getSituation(address)"));
-        console.log("Sono prima della encode");
         bytes memory data= abi.encodeWithSelector(selector,msg.sender);
-        console.log("Sono dopo la encode");
         (bool success, bytes memory result)=managerContract.call(data);
-        console.log("Dopo la chiamata");
 
         //Controllo esito chiamata
         require(success,"Call to exam manager contract failed!");
-        console.log("Prima la decode");
         (uint[] memory results, bool graduated)=abi.decode(result,(uint[],bool));
-        console.log("Dopo la decode");
 
         //Ottenimento dello stato del cappellino per l'indirizzo chiamante
         if(results.length!=2){
@@ -74,6 +86,143 @@ contract Smart_Hat is Ownable{
             }
         }
         graduatedVersion=graduated;
+        initialized=true;
         return(state,graduatedVersion);
     }
+    /***
+        @notice La funzione aggiunge al cappello una spilla relativa ad un esame superato senza lode. 
+            Solo il creatore del cappellino può chiamare questa funzione.
+        @param Una stringa che rappresenta il codice dell'esame di cui vogliamo aggiungere la spilla.
+        @return Restituisce il nuovo stato raggiunto dal cappellino
+    ***/
+    function aggiungi_spilla_argentata(string memory exam_code) public onlyOwner returns(exams_Situation){
+         //Otteniamo lo stato degli esami dell'indirizzo chiamante
+        bytes4 selector=bytes4(keccak256("getExamState(address,string)"));
+        bytes memory data= abi.encodeWithSelector(selector, msg.sender, exam_code);
+        (bool success, bytes memory result)=managerContract.call(data);
+
+        //Controllo esito chiamata
+         require(success,"Call to exam manager contract failed!");
+        (uint examState)=abi.decode(result,(uint));
+
+        //Controllo valutazione esame
+        if(examState==0)    
+            revert("Exam not passed");
+        if(examState==2)
+            revert("Exam passed with merit");
+
+        //Passaggio al nuovo stato
+        if(keccak256(abi.encodePacked(exam_code)) == keccak256(abi.encodePacked(ComputerNetworks))){
+            if(state==exams_Situation.CRYPTO_MERIT){
+                state=exams_Situation.NETWORK_STD_CRYPTO_MERIT;
+            }else{
+                if(state==exams_Situation.CRYPTO_STD){
+                    state=exams_Situation.NETWORK_STD_CRYPTO_STD;
+                }else{
+                    if(state==exams_Situation.NO_EXAMS){
+                        state=exams_Situation.NETWORK_STD;
+                    }
+                    //Se il cappello presenta una configurazione di esami diversa dallo standard non far niente
+                }
+            }   
+        }
+
+        if(keccak256(abi.encodePacked(exam_code)) == keccak256(abi.encodePacked(Cryptography))){
+            if(state==exams_Situation.NETWORK_MERIT){
+                state=exams_Situation.NETWORK_MERIT_CRYPTO_STD;
+            }else{
+                if(state==exams_Situation.NETWORK_STD){
+                    state=exams_Situation.NETWORK_STD_CRYPTO_STD;
+                }else{
+                    if(state==exams_Situation.NO_EXAMS){
+                        state=exams_Situation.CRYPTO_STD;
+                    }
+                    //Se il cappello presenta una configurazione di esami diversa dallo standard non far niente
+                }
+            }   
+        }
+
+        //Restituisce lo stato raggiunto dopo la chiamata
+        return (state);
+    }
+
+    /***
+        @notice La funzione aggiunge al cappello una spilla relativa ad un esame superato con lode. 
+            Solo il creatore del cappellino può chiamare questa funzione.
+        @param Una stringa che rappresenta il codice dell'esame di cui vogliamo aggiungere la spilla.
+        @return Restituisce il nuovo stato raggiunto dal cappellino
+    ***/
+    function aggiungi_spilla_dorata(string memory exam_code) public onlyOwner returns(exams_Situation){
+        //Otteniamo lo stato degli esami dell'indirizzo chiamante
+        bytes4 selector=bytes4(keccak256("getExamState(address,string)"));
+        bytes memory data= abi.encodeWithSelector(selector, msg.sender, exam_code);
+        (bool success, bytes memory result)=managerContract.call(data);
+
+        //Controllo esito chiamata
+         require(success,"Call to exam manager contract failed!");
+        (uint examState)=abi.decode(result,(uint));
+
+        //Controllo valutazione esame
+        if(examState==0)    
+            revert("Exam not passed");
+        if(examState==1)
+            revert("Exam passed without merit");
+
+        //Passaggio al nuovo stato
+        if(keccak256(abi.encodePacked(exam_code)) == keccak256(abi.encodePacked(ComputerNetworks))){
+            if(state==exams_Situation.CRYPTO_MERIT){
+                state=exams_Situation.NETWORK_MERIT_CRYPTO_MERIT;
+            }else{
+                if(state==exams_Situation.CRYPTO_STD){
+                    state=exams_Situation.NETWORK_MERIT_CRYPTO_STD;
+                }else{
+                    if(state==exams_Situation.NO_EXAMS){
+                        state=exams_Situation.NETWORK_MERIT;
+                    }
+                    //Se il cappello presenta una configurazione di esami diversa dallo standard non far niente
+                }
+            }   
+        }
+
+        if(keccak256(abi.encodePacked(exam_code)) == keccak256(abi.encodePacked(Cryptography))){
+            if(state==exams_Situation.NETWORK_MERIT){
+                state=exams_Situation.NETWORK_MERIT_CRYPTO_MERIT;
+            }else{
+                if(state==exams_Situation.NETWORK_STD){
+                    state=exams_Situation.NETWORK_STD_CRYPTO_MERIT;
+                }else{
+                    if(state==exams_Situation.NO_EXAMS){
+                        state=exams_Situation.CRYPTO_MERIT;
+                    }
+                    //Se il cappello presenta una configurazione di esami diversa dallo standard non far niente
+                }
+            }   
+        }
+
+        //Restituisce lo stato raggiunto dopo la chiamata
+        return (state);
+    }
+
+    /***
+        @notice La funzione cambia lo stato del cappello ordinario in cappello da laureato, il quale
+            manterrà tutte le spille aggiunte in precedenza. Solo il creatore del cappellino può chiamare
+            questa funzione.
+    ***/
+    function cambia_aspetto_cappello_da_laureato() public onlyOwner{
+        require(initialized,"Hat not initialized");
+
+        //Otteniamo lo stato degli esami dell'indirizzo chiamante
+        bytes4 selector=bytes4(keccak256("isGraduated(address)"));
+        bytes memory data= abi.encodeWithSelector(selector,msg.sender);
+        (bool success, bytes memory result)=managerContract.call(data);
+
+        //Controllo esito chiamata
+         require(success,"Call to exam manager contract failed!");
+        (bool graduated)=abi.decode(result,(bool));
+
+        //Controllo conseguimetno laurea
+        require(graduated,"You are not graduated");
+        graduatedVersion=true;
+    }
+
 }

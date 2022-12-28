@@ -6,7 +6,13 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "manager",
+						"type": "address"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
@@ -30,6 +36,51 @@
 				"type": "event"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "exam_code",
+						"type": "string"
+					}
+				],
+				"name": "aggiungi_spilla_argentata",
+				"outputs": [
+					{
+						"internalType": "enum Smart_Hat.exams_Situation",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "exam_code",
+						"type": "string"
+					}
+				],
+				"name": "aggiungi_spilla_dorata",
+				"outputs": [
+					{
+						"internalType": "enum Smart_Hat.exams_Situation",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "cambia_aspetto_cappello_da_laureato",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "crea_cappellino",
 				"outputs": [
@@ -45,6 +96,19 @@
 					}
 				],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "graduatedVersion",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -78,6 +142,19 @@
 				"name": "setManager",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "state",
+				"outputs": [
+					{
+						"internalType": "enum Smart_Hat.exams_Situation",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -132,11 +209,11 @@
 	},
 	"sources": {
 		"contracts/Smart_Hat.sol": {
-			"keccak256": "0xbb278e6a50dd4ba0c1e652ad76e4540acfa6e4fe30c28276f5d5ff3a6971e8d7",
+			"keccak256": "0x42386e279460f5638990d0a7143a1084be09ee74d3f7aaeb2997f5b9e8b48864",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://c1838125e9fdd59fea2392d2d5ed8610d56174b41bb9e6b300c89be0a07c433a",
-				"dweb:/ipfs/QmbFghu6f7Xw9ToRe3ixMMMia6TE99SzMeNZL98HVYewor"
+				"bzz-raw://4ac9d61f2d6d4970f683c8292028395c82caa1ac264fce0976839103123e96cb",
+				"dweb:/ipfs/QmRxoHnvPrhMaFwEeiXphYDDEe8kkGGCKdh2AihpqVzynG"
 			]
 		},
 		"hardhat/console.sol": {
