@@ -89,6 +89,7 @@ contract Smart_Hat is Ownable{
         initialized=true;
         return(state,graduatedVersion);
     }
+    
     /***
         @notice La funzione aggiunge al cappello una spilla relativa ad un esame superato senza lode. 
             Solo il creatore del cappellino può chiamare questa funzione.
@@ -96,6 +97,21 @@ contract Smart_Hat is Ownable{
         @return Restituisce il nuovo stato raggiunto dal cappellino
     ***/
     function aggiungi_spilla_argentata(string memory exam_code) public onlyOwner returns(exams_Situation){
+        //Controllo cappello inizializzato
+        require(initialized,"Hat not initialized");
+
+        //Controllo cappello laureato
+        require(graduatedVersion,"Graduated version of the hat cannot be edited");
+
+        //Controllo spilla già inserita
+        if(keccak256(abi.encodePacked(exam_code)) == keccak256(abi.encodePacked(ComputerNetworks))){
+            bool already_put=(uint(state)==uint(exams_Situation.CRYPTO_MERIT)) || (uint(state)==uint(exams_Situation.CRYPTO_STD)) || (uint(state)==uint(exams_Situation.NO_EXAMS)) || (uint(state)==uint(exams_Situation.OTHER_CONFIG));
+            require(already_put,"Pin already put for this exam!");
+        }
+        if(keccak256(abi.encodePacked(exam_code)) == keccak256(abi.encodePacked(Cryptography))){
+            bool already_put=(uint(state)==uint(exams_Situation.NETWORK_MERIT)) || (uint(state)==uint(exams_Situation.NETWORK_STD)) || (uint(state)==uint(exams_Situation.NO_EXAMS)) || (uint(state)==uint(exams_Situation.OTHER_CONFIG));
+            require(already_put,"Pin already put for this exam!");
+        }
          //Otteniamo lo stato degli esami dell'indirizzo chiamante
         bytes4 selector=bytes4(keccak256("getExamState(address,string)"));
         bytes memory data= abi.encodeWithSelector(selector, msg.sender, exam_code);
@@ -153,6 +169,22 @@ contract Smart_Hat is Ownable{
         @return Restituisce il nuovo stato raggiunto dal cappellino
     ***/
     function aggiungi_spilla_dorata(string memory exam_code) public onlyOwner returns(exams_Situation){
+        //Controllo cappello inizializzato
+        require(initialized,"Hat not initialized");
+
+        //Controllo cappello laureato
+        require(graduatedVersion,"Graduated version of the hat cannot be edited");
+
+        //Controllo spilla già inserita
+        if(keccak256(abi.encodePacked(exam_code)) == keccak256(abi.encodePacked(ComputerNetworks))){
+            bool already_put=(uint(state)==uint(exams_Situation.CRYPTO_MERIT)) || (uint(state)==uint(exams_Situation.CRYPTO_STD)) || (uint(state)==uint(exams_Situation.NO_EXAMS)) || (uint(state)==uint(exams_Situation.OTHER_CONFIG));
+            require(already_put,"Pin already put for this exam!");
+        }
+        if(keccak256(abi.encodePacked(exam_code)) == keccak256(abi.encodePacked(Cryptography))){
+            bool already_put=(uint(state)==uint(exams_Situation.NETWORK_MERIT)) || (uint(state)==uint(exams_Situation.NETWORK_STD)) || (uint(state)==uint(exams_Situation.NO_EXAMS)) || (uint(state)==uint(exams_Situation.OTHER_CONFIG));
+            require(already_put,"Pin already put for this exam!");
+        }
+
         //Otteniamo lo stato degli esami dell'indirizzo chiamante
         bytes4 selector=bytes4(keccak256("getExamState(address,string)"));
         bytes memory data= abi.encodeWithSelector(selector, msg.sender, exam_code);
@@ -209,7 +241,11 @@ contract Smart_Hat is Ownable{
             questa funzione.
     ***/
     function cambia_aspetto_cappello_da_laureato() public onlyOwner{
+        //Controllo inizializzazione
         require(initialized,"Hat not initialized");
+
+        //Controllo aspetto
+        require(!graduatedVersion,"Graduated hat already obtained");
 
         //Otteniamo lo stato degli esami dell'indirizzo chiamante
         bytes4 selector=bytes4(keccak256("isGraduated(address)"));
