@@ -100,6 +100,19 @@
 			},
 			{
 				"inputs": [],
+				"name": "get3DModel",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "graduatedVersion",
 				"outputs": [
 					{
@@ -109,25 +122,6 @@
 					}
 				],
 				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "index",
-						"type": "uint256"
-					}
-				],
-				"name": "model",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"stateMutability": "pure",
 				"type": "function"
 			},
 			{
@@ -228,11 +222,11 @@
 	},
 	"sources": {
 		"contracts/Smart_Hat.sol": {
-			"keccak256": "0x4405f03fee7370c5b28cec5764dc42400266e0544ba2b75bd58e57ef6f52abea",
+			"keccak256": "0xf19c6d6044dfde018da566eb793e828465b4c9b3ab762493972425edc8f571bc",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://467adf79223351fd7381ed2550ddca76caae7df8f0f7db80e0c6e016dafdb1b8",
-				"dweb:/ipfs/QmNoHSCYHPuWDBnicE2SF5wgE5Thy7gDcJPhAfzyJjc38E"
+				"bzz-raw://604984b05fab1f6c8df5f1cd8cd0d3183e55492feb7feb92fad14a3838f143c6",
+				"dweb:/ipfs/QmecA5QFtaZZ44webExg1r8v7FbsQ7VrwN7ak9W1iGjdUG"
 			]
 		},
 		"hardhat/console.sol": {

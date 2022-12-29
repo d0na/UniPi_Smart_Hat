@@ -5,7 +5,7 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contr
 import "hardhat/console.sol";
 
 contract Smart_Hat is Ownable{
-    using Strings for string;
+    using Strings for string; 
 
     //Costanti relative agli esami supportati dal sistema degli Smart_Hat
     string ComputerNetworks = "274AA";
@@ -34,10 +34,10 @@ contract Smart_Hat is Ownable{
     //-----Gestione degli stati del cappellino-----
 
     /***
-        @notice Crea il cappellino considerando anche dagli esami già sostenuti dall'utente.
-            Solo il creatore del cappellino può chiamare questa funzione.
-        @return La situazione degli esami finora sostenuti ed un booleano che indica se 
-            lo studente è laureato.
+    * @notice Crea il cappellino considerando anche dagli esami già sostenuti dall'utente.
+    *   Solo il creatore del cappellino può chiamare questa funzione.
+    * @return La situazione degli esami finora sostenuti ed un booleano che indica se 
+    *   lo studente è laureato.
     ***/
     function crea_cappellino() public onlyOwner returns (exams_Situation, bool) {
         require(!initialized,"Hat already initialized");
@@ -94,28 +94,29 @@ contract Smart_Hat is Ownable{
     }
 
     /***
-        @notice La funzione aggiunge al cappello una spilla relativa ad un esame superato senza lode. 
-            Solo il creatore del cappellino può chiamare questa funzione.
-        @param Una stringa che rappresenta il codice dell'esame di cui vogliamo aggiungere la spilla.
-        @return Restituisce il nuovo stato raggiunto dal cappellino
+    * @notice La funzione aggiunge al cappello una spilla relativa ad un esame superato senza lode. 
+    *   Solo il creatore del cappellino può chiamare questa funzione.
+    * @param Una stringa che rappresenta il codice dell'esame di cui vogliamo aggiungere la spilla.
+    * @return Restituisce il nuovo stato raggiunto dal cappellino
     ***/
     function aggiungi_spilla_argentata(string memory exam_code) public onlyOwner returns(exams_Situation){
         //Controllo cappello inizializzato
         require(initialized,"Hat not initialized");
 
         //Controllo cappello laureato
-        require(graduatedVersion,"Graduated version of the hat cannot be edited");
+        require(!graduatedVersion,"Graduated version of the hat cannot be edited");
 
         //Controllo spilla già inserita
-        if(keccak256(abi.encodePacked(exam_code)) == keccak256(abi.encodePacked(ComputerNetworks))){
+        if(equal(exam_code, ComputerNetworks)){
             bool already_put=(uint(state)==uint(exams_Situation.CRYPTO_MERIT)) || (uint(state)==uint(exams_Situation.CRYPTO_STD)) || (uint(state)==uint(exams_Situation.NO_EXAMS)) || (uint(state)==uint(exams_Situation.OTHER_CONFIG));
             require(already_put,"Pin already put for this exam!");
         }
-        if(keccak256(abi.encodePacked(exam_code)) == keccak256(abi.encodePacked(Cryptography))){
+        if(equal(exam_code, Cryptography)){
             bool already_put=(uint(state)==uint(exams_Situation.NETWORK_MERIT)) || (uint(state)==uint(exams_Situation.NETWORK_STD)) || (uint(state)==uint(exams_Situation.NO_EXAMS)) || (uint(state)==uint(exams_Situation.OTHER_CONFIG));
             require(already_put,"Pin already put for this exam!");
         }
-         //Otteniamo lo stato degli esami dell'indirizzo chiamante
+
+        //Otteniamo lo stato degli esami dell'indirizzo chiamante
         bytes4 selector=bytes4(keccak256("getExamState(address,string)"));
         bytes memory data= abi.encodeWithSelector(selector, msg.sender, exam_code);
         (bool success, bytes memory result)=managerContract.call(data);
@@ -131,7 +132,7 @@ contract Smart_Hat is Ownable{
             revert("Exam passed with merit");
 
         //Passaggio al nuovo stato
-        if(keccak256(abi.encodePacked(exam_code)) == keccak256(abi.encodePacked(ComputerNetworks))){
+        if(equal(exam_code, ComputerNetworks)){
             if(state==exams_Situation.CRYPTO_MERIT){
                 state=exams_Situation.NETWORK_STD_CRYPTO_MERIT;
             }else{
@@ -146,7 +147,7 @@ contract Smart_Hat is Ownable{
             }   
         }
 
-        if(keccak256(abi.encodePacked(exam_code)) == keccak256(abi.encodePacked(Cryptography))){
+        if(equal(exam_code, Cryptography)){
             if(state==exams_Situation.NETWORK_MERIT){
                 state=exams_Situation.NETWORK_MERIT_CRYPTO_STD;
             }else{
@@ -166,36 +167,27 @@ contract Smart_Hat is Ownable{
     }
 
     /***
-        @notice La funzione aggiunge al cappello una spilla relativa ad un esame superato con lode. 
-            Solo il creatore del cappellino può chiamare questa funzione.
-        @param Una stringa che rappresenta il codice dell'esame di cui vogliamo aggiungere la spilla.
-        @return Restituisce il nuovo stato raggiunto dal cappellino
+    * @notice La funzione aggiunge al cappello una spilla relativa ad un esame superato con lode. 
+    *   Solo il creatore del cappellino può chiamare questa funzione.
+    * @param Una stringa che rappresenta il codice dell'esame di cui vogliamo aggiungere la spilla.
+    * @return Restituisce il nuovo stato raggiunto dal cappellino
     ***/
     function aggiungi_spilla_dorata(string memory exam_code) public onlyOwner returns(exams_Situation){
         //Controllo cappello inizializzato
         require(initialized,"Hat not initialized");
 
         //Controllo cappello laureato
-        require(graduatedVersion,"Graduated version of the hat cannot be edited");
-
+        require(!graduatedVersion,"Graduated version of the hat cannot be edited");
+        
         //Controllo spilla già inserita
-        if(string.equal(exam_code,ComputerNetworks)){
+        if(equal(exam_code,ComputerNetworks)){
             bool already_put=(uint(state)==uint(exams_Situation.CRYPTO_MERIT)) || (uint(state)==uint(exams_Situation.CRYPTO_STD)) || (uint(state)==uint(exams_Situation.NO_EXAMS)) || (uint(state)==uint(exams_Situation.OTHER_CONFIG));
             require(already_put,"Pin already put for this exam!");
         }
-        if(Strings.equal(exam_code,Cryptography)){
+        if(equal(exam_code,Cryptography)){
             bool already_put=(uint(state)==uint(exams_Situation.NETWORK_MERIT)) || (uint(state)==uint(exams_Situation.NETWORK_STD)) || (uint(state)==uint(exams_Situation.NO_EXAMS)) || (uint(state)==uint(exams_Situation.OTHER_CONFIG));
             require(already_put,"Pin already put for this exam!");
         }
-        /*
-        if(keccak256(abi.encodePacked(exam_code)) == keccak256(abi.encodePacked(ComputerNetworks))){
-            bool already_put=(uint(state)==uint(exams_Situation.CRYPTO_MERIT)) || (uint(state)==uint(exams_Situation.CRYPTO_STD)) || (uint(state)==uint(exams_Situation.NO_EXAMS)) || (uint(state)==uint(exams_Situation.OTHER_CONFIG));
-            require(already_put,"Pin already put for this exam!");
-        }
-        if(keccak256(abi.encodePacked(exam_code)) == keccak256(abi.encodePacked(Cryptography))){
-            bool already_put=(uint(state)==uint(exams_Situation.NETWORK_MERIT)) || (uint(state)==uint(exams_Situation.NETWORK_STD)) || (uint(state)==uint(exams_Situation.NO_EXAMS)) || (uint(state)==uint(exams_Situation.OTHER_CONFIG));
-            require(already_put,"Pin already put for this exam!");
-        }*/
 
         //Otteniamo lo stato degli esami dell'indirizzo chiamante
         bytes4 selector=bytes4(keccak256("getExamState(address,string)"));
@@ -213,7 +205,7 @@ contract Smart_Hat is Ownable{
             revert("Exam passed without merit");
 
         //Passaggio al nuovo stato
-        if(keccak256(abi.encodePacked(exam_code)) == keccak256(abi.encodePacked(ComputerNetworks))){
+        if(equal(exam_code,ComputerNetworks)){
             if(state==exams_Situation.CRYPTO_MERIT){
                 state=exams_Situation.NETWORK_MERIT_CRYPTO_MERIT;
             }else{
@@ -228,7 +220,7 @@ contract Smart_Hat is Ownable{
             }   
         }
 
-        if(keccak256(abi.encodePacked(exam_code)) == keccak256(abi.encodePacked(Cryptography))){
+        if(equal(exam_code, Cryptography)){
             if(state==exams_Situation.NETWORK_MERIT){
                 state=exams_Situation.NETWORK_MERIT_CRYPTO_MERIT;
             }else{
@@ -248,9 +240,9 @@ contract Smart_Hat is Ownable{
     }
 
     /***
-        @notice La funzione cambia lo stato del cappello ordinario in cappello da laureato, il quale
-            manterrà tutte le spille aggiunte in precedenza. Solo il creatore del cappellino può chiamare
-            questa funzione.
+    * @notice La funzione cambia lo stato del cappello ordinario in cappello da laureato, il quale
+    *   manterrà tutte le spille aggiunte in precedenza. Solo il creatore del cappellino può chiamare
+    *   questa funzione.
     ***/
     function cambia_aspetto_cappello_da_laureato() public onlyOwner{
         //Controllo inizializzazione
@@ -275,9 +267,26 @@ contract Smart_Hat is Ownable{
 
     //-----Funzioni per ottenimento del modello 3D del cappello-----
     /***
-    ***/
-    function model(uint index) public pure returns(string memory){
-        string memory uri=string(abi.encodePacked("https://ipfs.io/ipfs/QmRwUk7emCH91aaNd9DZR4WE1dsQsynzsyzVnYXvqC4zdU/",Strings.toString(index),".glb"));
+    * @notice La funzione permette l'ottenimento dell'URL IPFS al modello tridimensionale del cappellino
+    *   corrispondente allo stato corrente.
+    */
+    function get3DModel() public view returns(string memory){
+        string memory uri;
+        if(!graduatedVersion){
+            uri=string(abi.encodePacked("https://ipfs.io/ipfs/QmRwUk7emCH91aaNd9DZR4WE1dsQsynzsyzVnYXvqC4zdU/",Strings.toString(uint(state)),".glb"));
+        }else{
+            //Il cappello da laureato può trovarsi in un numero minore di stati rispetto al cappellino ordinario
+            require((uint(state)>=uint(exams_Situation.NETWORK_STD_CRYPTO_STD)||(uint(state)<uint(exams_Situation.OTHER_CONFIG))),"Invalid state");
+            uri=string(abi.encodePacked("https://ipfs.io/ipfs/QmYbV9sAiTmg7i9bjYzUMUvN2zoWTVS2LG4HLDcUn51XAy",Strings.toString(uint(state)),".glb")); 
+        }
         return uri;
+    }
+
+    //-----Funzioni di utilità-----
+    /***
+     * @dev Funzione che verifica se due stringhe sono uguali
+     */
+    function equal(string memory a, string memory b) internal pure returns (bool) {
+        return keccak256(bytes(a)) == keccak256(bytes(b));
     }
 }
