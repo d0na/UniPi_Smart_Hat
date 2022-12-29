@@ -88,6 +88,68 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "index",
+						"type": "uint256"
+					}
+				],
+				"name": "IntToAddress",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"name": "addressHash",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "index",
+						"type": "address"
+					}
+				],
+				"name": "addressToInt",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "to",
 						"type": "address"
@@ -409,11 +471,19 @@
 	},
 	"sources": {
 		"contracts/UniPi_Hat.sol": {
-			"keccak256": "0xb0888469146f16e7340aa5864cfa1dcdec532388f12e1a1cfd1d53d17322a16f",
+			"keccak256": "0xf0d001fb1ee9f9ec5dc370e46412e79f246b40991cbdb3e47a783296ef204372",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://9dcc6816bcba3d31e7439b129c07050d97b29558541775997a16668c47851b64",
-				"dweb:/ipfs/QmTckeD77j8GEcTV19qC11GNNBBCRJvAwYFLDsPYN3U6Qi"
+				"bzz-raw://44b2162a975a79907a4c93fa64e09fd48a395b6ebeb6f0c9374e34ba16543ea6",
+				"dweb:/ipfs/QmQXdZDJFePPgYJWjxSKgAD95GV2FooAmqMSc74DzFkDp2"
+			]
+		},
+		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol": {
+			"keccak256": "0xa94b34880e3c1b0b931662cb1c09e5dfa6662f31cba80e07c5ee71cd135c9673",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://40fb1b5102468f783961d0af743f91b9980cf66b50d1d12009f6bb1869cea4d2",
+				"dweb:/ipfs/QmYqEbJML4jB1GHbzD4cUZDtJg5wVwNm3vDJq1GbyDus8y"
 			]
 		},
 		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/ERC721.sol": {
