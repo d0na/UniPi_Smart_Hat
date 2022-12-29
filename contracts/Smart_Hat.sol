@@ -1,11 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Strings.sol";
 import "hardhat/console.sol";
 
 contract Smart_Hat is Ownable{
+    using Strings for string;
+
     //Costanti relative agli esami supportati dal sistema degli Smart_Hat
-    string constant ComputerNetworks = "274AA";
+    string ComputerNetworks = "274AA";
     string constant Cryptography = "245AA";
 
     //Riferimento al contratto utilizzato da UniPi per caricare gli esami superati e le lauree conseguite
@@ -89,7 +92,7 @@ contract Smart_Hat is Ownable{
         initialized=true;
         return(state,graduatedVersion);
     }
-    
+
     /***
         @notice La funzione aggiunge al cappello una spilla relativa ad un esame superato senza lode. 
             Solo il creatore del cappellino può chiamare questa funzione.
@@ -176,6 +179,15 @@ contract Smart_Hat is Ownable{
         require(graduatedVersion,"Graduated version of the hat cannot be edited");
 
         //Controllo spilla già inserita
+        if(string.equal(exam_code,ComputerNetworks)){
+            bool already_put=(uint(state)==uint(exams_Situation.CRYPTO_MERIT)) || (uint(state)==uint(exams_Situation.CRYPTO_STD)) || (uint(state)==uint(exams_Situation.NO_EXAMS)) || (uint(state)==uint(exams_Situation.OTHER_CONFIG));
+            require(already_put,"Pin already put for this exam!");
+        }
+        if(Strings.equal(exam_code,Cryptography)){
+            bool already_put=(uint(state)==uint(exams_Situation.NETWORK_MERIT)) || (uint(state)==uint(exams_Situation.NETWORK_STD)) || (uint(state)==uint(exams_Situation.NO_EXAMS)) || (uint(state)==uint(exams_Situation.OTHER_CONFIG));
+            require(already_put,"Pin already put for this exam!");
+        }
+        /*
         if(keccak256(abi.encodePacked(exam_code)) == keccak256(abi.encodePacked(ComputerNetworks))){
             bool already_put=(uint(state)==uint(exams_Situation.CRYPTO_MERIT)) || (uint(state)==uint(exams_Situation.CRYPTO_STD)) || (uint(state)==uint(exams_Situation.NO_EXAMS)) || (uint(state)==uint(exams_Situation.OTHER_CONFIG));
             require(already_put,"Pin already put for this exam!");
@@ -183,7 +195,7 @@ contract Smart_Hat is Ownable{
         if(keccak256(abi.encodePacked(exam_code)) == keccak256(abi.encodePacked(Cryptography))){
             bool already_put=(uint(state)==uint(exams_Situation.NETWORK_MERIT)) || (uint(state)==uint(exams_Situation.NETWORK_STD)) || (uint(state)==uint(exams_Situation.NO_EXAMS)) || (uint(state)==uint(exams_Situation.OTHER_CONFIG));
             require(already_put,"Pin already put for this exam!");
-        }
+        }*/
 
         //Otteniamo lo stato degli esami dell'indirizzo chiamante
         bytes4 selector=bytes4(keccak256("getExamState(address,string)"));
@@ -261,4 +273,11 @@ contract Smart_Hat is Ownable{
         graduatedVersion=true;
     }
 
+    //-----Funzioni per ottenimento del modello 3D del cappello-----
+    /***
+    ***/
+    function model(uint index) public pure returns(string memory){
+        string memory uri=string(abi.encodePacked("https://ipfs.io/ipfs/QmRwUk7emCH91aaNd9DZR4WE1dsQsynzsyzVnYXvqC4zdU/",Strings.toString(index),".glb"));
+        return uri;
+    }
 }
