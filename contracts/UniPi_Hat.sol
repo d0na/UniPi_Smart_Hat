@@ -15,34 +15,29 @@ contract UniPi_Hat is ERC721URIStorage {
     */
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
         _requireMinted(tokenId);
+        
+        //Recupero l'indirizzo del contratto
+        address hat_contract=intToAddress(tokenId);
+
+        //Otteniamo lo stato degli esami dell'indirizzo chiamante
         /*
-        string memory _tokenURI = _tokenURIs[tokenId];
-        string memory base = _baseURI();
+        bytes4 selector=bytes4(keccak256("get3DModel()"));
+        bytes memory data= abi.encodeWithSelector(selector);
+        (bool success, bytes memory result)=hat_contract.call(data);
 
-        // If there is no base URI, return the token URI.
-        if (bytes(base).length == 0) {
-            return _tokenURI;
-        }
-        // If both are set, concatenate the baseURI and tokenURI (via abi.encodePacked).
-        if (bytes(_tokenURI).length > 0) {
-            return string(abi.encodePacked(base, _tokenURI));
-        }
-
-        return super.tokenURI(tokenId);*/
+        require(success,"Failed to obtain tokenURI from Smart_Hat contract");
+        (string memory uri)=abi.decode(result,(string));
+        */
+        return "";
         //Da rivedere facendo in modo di restituire la URI ottenuta dal contratto
     }
 
     //-----Funzioni per la gestione degli indirizzi-----
-    function addressHash(address addr) public pure returns(bytes32,uint){
-        bytes32 res=keccak256(abi.encodePacked(addr));
-        return(res,uint(res));
-    }
-
     function addressToInt(address index) public pure returns(uint){
         return uint(uint160(index));
     }
     
-    function IntToAddress(uint index) public pure returns (address){
+    function intToAddress(uint index) public pure returns (address){
         return address(uint160(index));
     }
 }

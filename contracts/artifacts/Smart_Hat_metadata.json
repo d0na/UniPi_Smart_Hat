@@ -222,11 +222,11 @@
 	},
 	"sources": {
 		"contracts/Smart_Hat.sol": {
-			"keccak256": "0xf19c6d6044dfde018da566eb793e828465b4c9b3ab762493972425edc8f571bc",
+			"keccak256": "0x2f8734858c035d50730b7c6f0fbb2de6058de53b4093619a240ea18c7d69f480",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://604984b05fab1f6c8df5f1cd8cd0d3183e55492feb7feb92fad14a3838f143c6",
-				"dweb:/ipfs/QmecA5QFtaZZ44webExg1r8v7FbsQ7VrwN7ak9W1iGjdUG"
+				"bzz-raw://ad898d90b9bd5bf920471f9b1e60c4c6483d92fa2db51b08811d716b92d2da5c",
+				"dweb:/ipfs/Qmb9nviJNKjo3saa2x7nVBM4tuY3PGiVQYCzdgcEaVqRCE"
 			]
 		},
 		"hardhat/console.sol": {

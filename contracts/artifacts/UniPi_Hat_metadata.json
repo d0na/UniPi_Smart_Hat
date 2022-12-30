@@ -88,49 +88,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "index",
-						"type": "uint256"
-					}
-				],
-				"name": "IntToAddress",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "pure",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "addr",
-						"type": "address"
-					}
-				],
-				"name": "addressHash",
-				"outputs": [
-					{
-						"internalType": "bytes32",
-						"name": "",
-						"type": "bytes32"
-					},
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "pure",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "address",
 						"name": "index",
 						"type": "address"
@@ -201,6 +158,25 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "index",
+						"type": "uint256"
+					}
+				],
+				"name": "intToAddress",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "pure",
 				"type": "function"
 			},
 			{
@@ -471,11 +447,11 @@
 	},
 	"sources": {
 		"contracts/UniPi_Hat.sol": {
-			"keccak256": "0xf0d001fb1ee9f9ec5dc370e46412e79f246b40991cbdb3e47a783296ef204372",
+			"keccak256": "0x80ee5f2daff725949d744ce40044329ea7359bac9a584d705f4446ee99b8632a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://44b2162a975a79907a4c93fa64e09fd48a395b6ebeb6f0c9374e34ba16543ea6",
-				"dweb:/ipfs/QmQXdZDJFePPgYJWjxSKgAD95GV2FooAmqMSc74DzFkDp2"
+				"bzz-raw://256d955fcedac7649192ba25244c971b3b1b8ba728a654c8be598662970824ba",
+				"dweb:/ipfs/QmafizWJEzVWJjSxpM735X9fSn1ozpQZtHupxYhMwhcdiY"
 			]
 		},
 		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol": {

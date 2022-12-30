@@ -260,7 +260,7 @@ contract Smart_Hat is Ownable{
          require(success,"Call to exam manager contract failed!");
         (bool graduated)=abi.decode(result,(bool));
 
-        //Controllo conseguimetno laurea
+        //Controllo conseguimento laurea
         require(graduated,"You are not graduated");
         graduatedVersion=true;
     }
