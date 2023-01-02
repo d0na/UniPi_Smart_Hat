@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
 import "hardhat/console.sol";
 import "./Gestione_Esami.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
