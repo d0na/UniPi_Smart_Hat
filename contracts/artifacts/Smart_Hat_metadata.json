@@ -44,13 +44,7 @@
 					}
 				],
 				"name": "aggiungi_spilla_argentata",
-				"outputs": [
-					{
-						"internalType": "enum Smart_Hat.exams_Situation",
-						"name": "",
-						"type": "uint8"
-					}
-				],
+				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -63,13 +57,7 @@
 					}
 				],
 				"name": "aggiungi_spilla_dorata",
-				"outputs": [
-					{
-						"internalType": "enum Smart_Hat.exams_Situation",
-						"name": "",
-						"type": "uint8"
-					}
-				],
+				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -85,9 +73,9 @@
 				"name": "crea_cappellino",
 				"outputs": [
 					{
-						"internalType": "enum Smart_Hat.exams_Situation",
-						"name": "",
-						"type": "uint8"
+						"internalType": "uint256",
+						"name": "pinsNum",
+						"type": "uint256"
 					},
 					{
 						"internalType": "bool",
@@ -113,12 +101,51 @@
 			},
 			{
 				"inputs": [],
-				"name": "graduatedVersion",
+				"name": "getNumberOfPins",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "initialized",
 				"outputs": [
 					{
 						"internalType": "bool",
 						"name": "",
 						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "isGraduatedVersion",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "managerContract",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -155,19 +182,6 @@
 				"name": "setManager",
 				"outputs": [],
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "state",
-				"outputs": [
-					{
-						"internalType": "enum Smart_Hat.exams_Situation",
-						"name": "",
-						"type": "uint8"
-					}
-				],
-				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -221,12 +235,20 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/Smart_Hat.sol": {
-			"keccak256": "0x2f8734858c035d50730b7c6f0fbb2de6058de53b4093619a240ea18c7d69f480",
+		"contracts/Gestione_Esami.sol": {
+			"keccak256": "0x7e9cc11d59eb6f6113db1187c0a6157fe0fb634aef14a80b111b9fe719ab839e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://ad898d90b9bd5bf920471f9b1e60c4c6483d92fa2db51b08811d716b92d2da5c",
-				"dweb:/ipfs/Qmb9nviJNKjo3saa2x7nVBM4tuY3PGiVQYCzdgcEaVqRCE"
+				"bzz-raw://3a166aa76745b46694be576fbe4cf768bc642ed659ed491cd59cb241b61892b0",
+				"dweb:/ipfs/QmXw24XKgwcLDLo2pE1yUpMYboKEefsvfatmut19Euw1hz"
+			]
+		},
+		"contracts/Smart_Hat.sol": {
+			"keccak256": "0x85cf07bd95539ba2c793dbf807a7b65374ee3887df21e0929c3d3eb86ab1f655",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d0e13668e4389c58710ee14134ec1f0afd4b39bcddd9a94371920900fbaef717",
+				"dweb:/ipfs/QmajmV7ETPaDfn4oAwfjdj35kuYa6yVQvPaxxvYJ3nuCzs"
 			]
 		},
 		"hardhat/console.sol": {
