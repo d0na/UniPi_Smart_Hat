@@ -17,28 +17,26 @@ contract Smart_Hat is Ownable{
     string constant GraduatedHat = "QmV3E1VUg9tUymRuoR7Couf8VwHtrasFFwE24B2DS75T2F";
 
     //Riferimento al contratto utilizzato da UniPi per caricare gli esami superati e le lauree conseguite
-    address public managerContract;
+    address public examsManager;
+    address public collectionContract;
 
     //Stato del cappellino
     mapping(string => pinVersion) state;
-    uint numberOfPins=0;
-    bool graduatedVersion=false;
+    uint numberOfPins = 0;
+    bool graduatedVersion = false;
     enum pinVersion{NO_PIN, SILVER_PIN, GOLDEN_PIN}
 
     bool public initialized=false;
     //bool unsupportedConfiguration=false; //configurazione di esami non supportata dal sistema di spille
 
     //-----Construttore e funzione per la gestione dell'indirizzo del contratto manager degli esami
-    constructor(address manager){
-        require(manager == address(manager),"Invalid manager contract address");
-        managerContract = manager;
+    constructor(address manager, address collection){
+        require(manager == address(manager),"Invalid exams manager contract address");
+        require(collection == address(collection),"Invalid collection contract address");
+        examsManager = manager;
+        collectionContract = collectionContract;
         supportedExams.push(ComputerNetworks);
         supportedExams.push(Cryptography);
-    }
-
-    function setManager(address manager) public onlyOwner {
-        require(manager == address(manager),"Invalid manager contract address");
-        managerContract = manager;
     }
 
     //-----Gestione degli stati del cappellino-----
@@ -50,22 +48,22 @@ contract Smart_Hat is Ownable{
     *   è in versione da laureato.
     ***/
     function crea_cappellino() public onlyOwner returns (uint pinsNum, bool) {
-        require(!initialized,"Hat already initialized");
+        require(!initialized, "Hat already initialized");
 
         //Ottengo lo stato degli esami dell'indirizzo chiamante
-        Gestione_Esami ge = Gestione_Esami(managerContract);
+        Gestione_Esami ge = Gestione_Esami(examsManager);
         (Gestione_Esami.examState[] memory results, bool graduated) = ge.getSituation(msg.sender);
         string[] memory examList = ge.getExamList();
 
         //Controllo dei risultati finora conseguiti
-        for(uint i=0;i<results.length;i++){
+        for(uint i=0; i<results.length; i++){
             //Caso di un esame superato
-            if(results[i]!=Gestione_Esami.examState.TO_DO){
+            if(results[i] != Gestione_Esami.examState.TO_DO){
                 //Caso esame superato e con spilla disponibile
                 if(isSupported(examList[i])){ 
                     numberOfPins++;
                     //Assegnazione spilla corretta
-                    if(results[i]==Gestione_Esami.examState.PASSED)
+                    if(results[i] == Gestione_Esami.examState.PASSED)
                         state[examList[i]] = pinVersion.SILVER_PIN;
                     else
                         state[examList[i]] = pinVersion.GOLDEN_PIN;
@@ -90,16 +88,16 @@ contract Smart_Hat is Ownable{
         require(!graduatedVersion, "Graduated version of the hat cannot be edited");
 
         //Controllo spilla già inserita
-        require(state[exam_code]==pinVersion.NO_PIN, "Pin already put for this exam!");
+        require(state[exam_code] == pinVersion.NO_PIN, "Pin already put for this exam!");
 
         //Otteniamo lo stato degli esami dell'indirizzo chiamante
-        Gestione_Esami ge = Gestione_Esami(managerContract);
+        Gestione_Esami ge = Gestione_Esami(examsManager);
         Gestione_Esami.examState examState = ge.getExamState(msg.sender, exam_code);
 
         //Controllo valutazione esame
-        if(examState==Gestione_Esami.examState.TO_DO)    
+        if(examState == Gestione_Esami.examState.TO_DO)    
             revert("Exam not passed");
-        if(examState==Gestione_Esami.examState.PASSED_WITH_MERIT)
+        if(examState == Gestione_Esami.examState.PASSED_WITH_MERIT)
             revert("Exam passed with merit");
 
         //Controllo disponibilità della spilla
@@ -125,13 +123,13 @@ contract Smart_Hat is Ownable{
         require(state[exam_code]==pinVersion.NO_PIN, "Pin already put for this exam!");
 
         //Otteniamo lo stato degli esami dell'indirizzo chiamante
-        Gestione_Esami ge = Gestione_Esami(managerContract);
+        Gestione_Esami ge = Gestione_Esami(examsManager);
         Gestione_Esami.examState examState = ge.getExamState(msg.sender, exam_code);
 
         //Controllo valutazione esame
-        if(examState==Gestione_Esami.examState.TO_DO)    
+        if(examState == Gestione_Esami.examState.TO_DO)    
             revert("Exam not passed");
-        if(examState==Gestione_Esami.examState.PASSED)
+        if(examState == Gestione_Esami.examState.PASSED)
             revert("Exam passed without merit");
 
         //Controllo disponibilità della spilla
@@ -154,12 +152,12 @@ contract Smart_Hat is Ownable{
         require(!graduatedVersion, "Graduated hat already obtained");
 
         //Verifico lo status di laureato dell'indirizzo chiamante
-        Gestione_Esami ge = Gestione_Esami(managerContract);
+        Gestione_Esami ge = Gestione_Esami(examsManager);
         bool graduated = ge.isGraduated(msg.sender); 
 
         //Controllo conseguimento laurea
         require(graduated, "You are not graduated");
-        graduatedVersion=true;
+        graduatedVersion = true;
     }
 
     //-----Funzioni per ottenimento del modello 3D del cappello-----
@@ -172,10 +170,10 @@ contract Smart_Hat is Ownable{
         
         //Determinazione del nome del file del modello tridimensionale
         string memory Filename = "";
-        if(numberOfPins==0){
+        if(numberOfPins == 0){
             Filename = "0";
         }else{
-            for(uint i=0;i<supportedExams.length;i++){
+            for(uint i=0; i<supportedExams.length; i++){
                 Filename = string(abi.encodePacked(Filename,Strings.toString(uint(state[supportedExams[i]]))));
             }
         }
@@ -192,12 +190,12 @@ contract Smart_Hat is Ownable{
 
     //-----Funzioni getter-----
     function isGraduatedVersion() public view returns (bool){
-        require(initialized,"Hat not initialized");
+        require(initialized, "Hat not initialized");
         return graduatedVersion;
     }
 
     function getNumberOfPins() public view returns (uint){
-        require(initialized,"Hat not initialized");
+        require(initialized, "Hat not initialized");
         return numberOfPins;
     }
 
@@ -213,7 +211,7 @@ contract Smart_Hat is Ownable{
     * @notice Funzione che verifica se il codice esame verificato è uno di quelli supportati dal contratto
     */
     function isSupported(string memory to_test) internal view returns (bool){
-        for(uint i=0;i<supportedExams.length;i++){
+        for(uint i=0; i<supportedExams.length; i++){
             if(equal(supportedExams[i],to_test))
                 return true;
         }
