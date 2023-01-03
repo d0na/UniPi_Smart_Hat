@@ -144,6 +144,25 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "exam_code",
+						"type": "string"
+					}
+				],
+				"name": "hasPin",
+				"outputs": [
+					{
+						"internalType": "enum Smart_Hat.pinVersion",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "initialized",
 				"outputs": [
@@ -281,11 +300,11 @@
 			]
 		},
 		"contracts/Smart_Hat.sol": {
-			"keccak256": "0x75b48ae368e11b3410d83f1bea40fb3ab74f6186397eb34b19b43f55ba5eaee9",
+			"keccak256": "0xb0b23b5046f44e19ba9fc3da8675f3d2429af46374b9c992bd441e759dce2530",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://155ff85a6f68736c4916de6f712754e61c314cc05247755632b5ce9d51248b01",
-				"dweb:/ipfs/Qmb8tLRmdphWAZejCsFETzBgUS8oLKY4CBpZzYGabovMAB"
+				"bzz-raw://3ca9967490e812e840123647b30eb86087cdb0bce1446ab4cfafa0b0562b3e80",
+				"dweb:/ipfs/QmRceMnve7VJPpnKN19t7aM1yHQUAuut92fqipqGna8DY2"
 			]
 		},
 		"hardhat/console.sol": {

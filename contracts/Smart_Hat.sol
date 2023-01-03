@@ -25,16 +25,15 @@ contract Smart_Hat is Ownable{
     uint numberOfPins = 0;
     bool graduatedVersion = false;
     enum pinVersion{NO_PIN, SILVER_PIN, GOLDEN_PIN}
-
     bool public initialized=false;
-    //bool unsupportedConfiguration=false; //configurazione di esami non supportata dal sistema di spille
+
 
     //-----Construttore e funzione per la gestione dell'indirizzo del contratto manager degli esami
     constructor(address manager, address collection){
         require(manager == address(manager),"Invalid exams manager contract address");
         require(collection == address(collection),"Invalid collection contract address");
         examsManager = manager;
-        collectionContract = collectionContract;
+        collectionContract = collection;
         supportedExams.push(ComputerNetworks);
         supportedExams.push(Cryptography);
     }
@@ -197,6 +196,15 @@ contract Smart_Hat is Ownable{
     function getNumberOfPins() public view returns (uint){
         require(initialized, "Hat not initialized");
         return numberOfPins;
+    }
+
+    /***
+    * @notice Funzione per verificare la presenza di una spilla relativa ad un certo esame.
+    * @return Restituisce un intero che indica la presenza della spilla ed in caso affermativo
+    *   la sua tipologia
+    */
+    function hasPin(string memory exam_code) public view returns (pinVersion){
+        return state[exam_code];
     }
 
     //-----Funzioni di utilità-----
