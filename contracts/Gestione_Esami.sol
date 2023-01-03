@@ -4,7 +4,6 @@ import "./Ownable.sol";
 import "hardhat/console.sol";
 
 contract Gestione_Esami is Ownable {
-
     enum examState{TO_DO, PASSED, PASSED_WITH_MERIT}
    
     /*  (Codice esame => (indirizzo studente => stato esame))

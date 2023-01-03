@@ -34,20 +34,23 @@ contract UniPi_Hat is ERC721, Ownable {
     * @notice Funzione per il minting del token e trasferimento al beneficiario.
     * @param Indirizzo del proprietario del nuovo token coniato
     * @returns L'indirizzo del contratto Smart_Hat che rappresenta il nuovo cappellino creato.
+    * @returns L'id del token creato
     */
-    function mint(address to) public returns (address){
+    function mint(address to) public returns (address,uint){
+        require(to == address(to), "Invalid address");
+        
         //Creo un nuovo cappellino passando l'indirizzo di questo contratto come manager.
-        Smart_Hat new_hat = new Smart_Hat(managerContract,address(this));
+        Smart_Hat new_hat = new Smart_Hat(managerContract,address(this),to);
 
         /*Il proprietario di questo contratto sarà il beneficiario il quale potrà invocare
         tutti i metodi previsti da esso*/
         new_hat.transferOwnership(to);
 
         //Determinazione del tokenID e chiamata alla funzione di minting del contratto ERC721
-        uint tokenId=uint160(address(new_hat));
+        uint tokenId = uint160(address(new_hat));
         _safeMint(to, tokenId, "");
 
-        return address(new_hat);
+        return (address(new_hat), tokenId);
     }
 
     /***
@@ -75,11 +78,12 @@ contract UniPi_Hat is ERC721, Ownable {
             /*Se il cappello presenta una spilla di un esame non superato dal potenziale
                 acquirente l'operazione viene annullata*/
             if( (hat.hasPin(examList[i]) != Smart_Hat.pinVersion.NO_PIN) && 
-                (uint(ge.getMyExamState(examList[i])) == uint(Gestione_Esami.examState.TO_DO))
+                (uint(ge.getExamState(to,examList[i])) == uint(Gestione_Esami.examState.TO_DO))
                 )
                 revert("Hat not compatible with the exams situation of the buyer!");
         }
 
+        hat.transferOwnership(to);
         //Chiamata a safeTransferFrom del contratto ERC721
         safeTransferFrom(from,to,tokenId,"");
     }

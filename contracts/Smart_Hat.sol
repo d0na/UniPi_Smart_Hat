@@ -4,7 +4,7 @@ import "hardhat/console.sol";
 import "./Gestione_Esami.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
-contract Smart_Hat is Ownable{
+contract Smart_Hat {
     using Strings for string; 
 
     //Costanti relative agli esami supportati dal sistema degli Smart_Hat
@@ -19,6 +19,7 @@ contract Smart_Hat is Ownable{
     //Riferimento al contratto utilizzato da UniPi per caricare gli esami superati e le lauree conseguite
     address public examsManager;
     address public collectionContract;
+    address public currentOwner; 
 
     //Stato del cappellino
     mapping(string => pinVersion) state;
@@ -29,15 +30,28 @@ contract Smart_Hat is Ownable{
 
 
     //-----Construttore e funzione per la gestione dell'indirizzo del contratto manager degli esami
-    constructor(address manager, address collection){
+    constructor(address manager, address collection, address owner){
         require(manager == address(manager),"Invalid exams manager contract address");
         require(collection == address(collection),"Invalid collection contract address");
+        require(owner == address(owner),"Invalid collection contract address");
         examsManager = manager;
         collectionContract = collection;
+        currentOwner=owner;
+
         supportedExams.push(ComputerNetworks);
         supportedExams.push(Cryptography);
     }
 
+    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+    function transferOwnership(address to) public onlyUniPi{
+        require(to == address(to), "Invalid address");
+        require(to != address(0), "Ownable: new owner is the zero address");
+
+        address oldOwner = currentOwner;
+        currentOwner = to;
+        emit OwnershipTransferred(oldOwner, currentOwner);
+    }
+    
     //-----Gestione degli stati del cappellino-----
 
     /***
@@ -224,5 +238,18 @@ contract Smart_Hat is Ownable{
                 return true;
         }
         return false;
+    }
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == currentOwner, "Caller is not the owner");
+        _;
+    }
+
+    modifier onlyUniPi(){
+        require(msg.sender == collectionContract, "Caller is not the owner");
+        _;
     }
 }

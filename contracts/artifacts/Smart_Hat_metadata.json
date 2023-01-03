@@ -16,6 +16,11 @@
 						"internalType": "address",
 						"name": "collection",
 						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
 					}
 				],
 				"stateMutability": "nonpayable",
@@ -106,6 +111,19 @@
 			},
 			{
 				"inputs": [],
+				"name": "currentOwner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "examsManager",
 				"outputs": [
 					{
@@ -189,30 +207,10 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "owner",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "renounceOwnership",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "newOwner",
+						"name": "to",
 						"type": "address"
 					}
 				],
@@ -224,17 +222,7 @@
 		],
 		"devdoc": {
 			"kind": "dev",
-			"methods": {
-				"owner()": {
-					"details": "Returns the address of the current owner."
-				},
-				"renounceOwnership()": {
-					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
-				},
-				"transferOwnership(address)": {
-					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
-				}
-			},
+			"methods": {},
 			"version": 1
 		},
 		"userdoc": {
@@ -253,7 +241,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
@@ -300,11 +288,11 @@
 			]
 		},
 		"contracts/Smart_Hat.sol": {
-			"keccak256": "0xb0b23b5046f44e19ba9fc3da8675f3d2429af46374b9c992bd441e759dce2530",
+			"keccak256": "0xaf1f17e818d8a86f142ec2fa235d6dad2fb6afc84909357cb6fc8cea60183187",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://3ca9967490e812e840123647b30eb86087cdb0bce1446ab4cfafa0b0562b3e80",
-				"dweb:/ipfs/QmRceMnve7VJPpnKN19t7aM1yHQUAuut92fqipqGna8DY2"
+				"bzz-raw://066324fc1fc3f480e8cafc09f1ad53f58a04aed24a313c629511c2544911b5ba",
+				"dweb:/ipfs/QmS3PCEJfFV1RxHfPudrDaqwPNP55FVGYTaTv1r6Fb6smi"
 			]
 		},
 		"hardhat/console.sol": {
