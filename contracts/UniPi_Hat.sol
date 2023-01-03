@@ -17,6 +17,7 @@ contract UniPi_Hat is ERC721, Ownable {
     /***
     * @notice Funzione per l'ottenimento della URI che contiene i metadati associati ad un token.
     * @param Il tokenId del token di cui vogliamo ottenere la URI
+    * @returns La stringa contenente la URI richiesta
     */
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
         _requireMinted(tokenId);
@@ -32,6 +33,7 @@ contract UniPi_Hat is ERC721, Ownable {
     /***
     * @notice Funzione per il minting del token e trasferimento al beneficiario.
     * @param Indirizzo del proprietario del nuovo token coniato
+    * @returns L'indirizzo del contratto Smart_Hat che rappresenta il nuovo cappellino creato.
     */
     function mint(address to) public returns (address){
         //Creo un nuovo cappellino passando l'indirizzo di questo contratto come manager.
@@ -41,32 +43,44 @@ contract UniPi_Hat is ERC721, Ownable {
         tutti i metodi previsti da esso*/
         new_hat.transferOwnership(to);
 
+        //Determinazione del tokenID e chiamata alla funzione di minting del contratto ERC721
         uint tokenId=uint160(address(new_hat));
-        
         _safeMint(to, tokenId, "");
 
         return address(new_hat);
     }
 
+    /***
+    * @notice Funzione per il trasferimento vincolato di un cappellino dall'indirizzo 'from' all'indirizzo 'to'.
+    *   Il trasferimento viene approvato solamente se 'to' ha superato tutti gli esami che sono presenti sul cappello
+    *   con una spilla.
+    * @param Indirizzo 'from' dell'attuale proprietario del cappellino
+    * @param Indirizzo 'to' del potenziale acquirente del cappellino
+    * @param Id del cappellino oggetto del trasferimento
+    */
     function safeTransferToStudent(address from, address to, uint256 tokenId) public{
         Gestione_Esami ge = Gestione_Esami(managerContract);
 
-        //Recupero la situazione del potenziale acquirente
+        //Recupera la situazione del potenziale acquirente
         string[] memory examList=ge.getExamList();
 
-        //Recupero la situazione del cappello
-        Smart_Hat hat = Smart_Hat(address(uint160(tokenId)));
+        //Recupera il contratto del cappello
+        Smart_Hat hat = Smart_Hat(intToAddress(tokenId));
 
-        //Verifico la presenza delle spille per gli esami passati
+        //Verifica della conformità di versione del cappello (da laureato o standard)
         require(ge.isGraduated(to) == hat.isGraduatedVersion(), "Hat not compatible with the exams situation of the buyer!");
 
+        //Verifica del superamento da parte di 'to' per gli esami che hanno spille apposte sul cappello
         for(uint i = 0; i<examList.length; i++){
+            /*Se il cappello presenta una spilla di un esame non superato dal potenziale
+                acquirente l'operazione viene annullata*/
             if( (hat.hasPin(examList[i]) != Smart_Hat.pinVersion.NO_PIN) && 
                 (uint(ge.getMyExamState(examList[i])) == uint(Gestione_Esami.examState.TO_DO))
                 )
                 revert("Hat not compatible with the exams situation of the buyer!");
         }
 
+        //Chiamata a safeTransferFrom del contratto ERC721
         safeTransferFrom(from,to,tokenId,"");
     }
 

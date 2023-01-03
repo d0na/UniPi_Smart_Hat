@@ -635,11 +635,11 @@
 			]
 		},
 		"contracts/UniPi_Hat.sol": {
-			"keccak256": "0x04043ab1aa3b4ed1706a97413ae9fd22d253264fc46a6e38c6b4fefc2c34e8bf",
+			"keccak256": "0x7489723abdab7f729bc785448721b3be4a5980606d5fc6cd6066d2d5d28d4db2",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8464c3c089ff106dc60f9888e74c39d6934bbd7cdb7f2b3050d958e15aa6ef5f",
-				"dweb:/ipfs/Qmf1TiQEnkKzKnU3Mf1n3zMm1ELvMckMDA3UwbT8sxktvz"
+				"bzz-raw://3a28c5a35a5e70c4941afa12d64328d4f01b788d53470cb2d16c38e91e43a310",
+				"dweb:/ipfs/QmU9K8imG1A8su9LGiW9uhmtwqxZfjXn1K1K1YP9Y4RCP1"
 			]
 		},
 		"hardhat/console.sol": {
