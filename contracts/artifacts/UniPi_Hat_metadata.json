@@ -114,25 +114,6 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "index",
-						"type": "address"
-					}
-				],
-				"name": "addressToInt",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "pure",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
 						"name": "to",
 						"type": "address"
 					},
@@ -183,25 +164,6 @@
 					}
 				],
 				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "index",
-						"type": "uint256"
-					}
-				],
-				"name": "intToAddress",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "pure",
 				"type": "function"
 			},
 			{
@@ -367,6 +329,29 @@
 				"inputs": [
 					{
 						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "safeTransferToStudent",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
 						"name": "operator",
 						"type": "address"
 					},
@@ -377,19 +362,6 @@
 					}
 				],
 				"name": "setApprovalForAll",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "manager",
-						"type": "address"
-					}
-				],
-				"name": "setExamsManager",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -655,19 +627,19 @@
 			]
 		},
 		"contracts/Smart_Hat.sol": {
-			"keccak256": "0x75b48ae368e11b3410d83f1bea40fb3ab74f6186397eb34b19b43f55ba5eaee9",
+			"keccak256": "0xb0b23b5046f44e19ba9fc3da8675f3d2429af46374b9c992bd441e759dce2530",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://155ff85a6f68736c4916de6f712754e61c314cc05247755632b5ce9d51248b01",
-				"dweb:/ipfs/Qmb8tLRmdphWAZejCsFETzBgUS8oLKY4CBpZzYGabovMAB"
+				"bzz-raw://3ca9967490e812e840123647b30eb86087cdb0bce1446ab4cfafa0b0562b3e80",
+				"dweb:/ipfs/QmRceMnve7VJPpnKN19t7aM1yHQUAuut92fqipqGna8DY2"
 			]
 		},
 		"contracts/UniPi_Hat.sol": {
-			"keccak256": "0xe2c04a16b668845365213c8687ea06df2a512237893a175f8163a26b5e63533b",
+			"keccak256": "0x04043ab1aa3b4ed1706a97413ae9fd22d253264fc46a6e38c6b4fefc2c34e8bf",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://3fea2ea2a06c8db6d708ab8e41ab2013106a247cfae4475912064154efe60b20",
-				"dweb:/ipfs/QmWHHng9aaVLHLhBVFhn5x4RCuJSPiXENCpbdTbQzbQCiZ"
+				"bzz-raw://8464c3c089ff106dc60f9888e74c39d6934bbd7cdb7f2b3050d958e15aa6ef5f",
+				"dweb:/ipfs/Qmf1TiQEnkKzKnU3Mf1n3zMm1ELvMckMDA3UwbT8sxktvz"
 			]
 		},
 		"hardhat/console.sol": {

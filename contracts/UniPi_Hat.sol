@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-//import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "./Ownable.sol";
 import "./Smart_Hat.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -13,11 +12,6 @@ contract UniPi_Hat is ERC721, Ownable {
     constructor(address managerAddress) ERC721("UniPi Metaverse Hat", "UNIPIMVHAT") {
         require(managerAddress == address(managerAddress),"Invalid address");
         managerContract = managerAddress;
-    }
-
-    function setExamsManager(address manager) public onlyOwner {
-        require(manager == address(manager),"Invalid manager contract address");
-        managerContract = manager;
     }
 
     /***
@@ -41,28 +35,47 @@ contract UniPi_Hat is ERC721, Ownable {
     */
     function mint(address to) public returns (address){
         //Creo un nuovo cappellino passando l'indirizzo di questo contratto come manager.
-        console.log("Mio address %s",address(this));
         Smart_Hat new_hat = new Smart_Hat(managerContract,address(this));
-        console.log("Hat address %s",address(new_hat));
 
         /*Il proprietario di questo contratto sarà il beneficiario il quale potrà invocare
         tutti i metodi previsti da esso*/
         new_hat.transferOwnership(to);
 
         uint tokenId=uint160(address(new_hat));
-        console.log("Hat id %s",tokenId);
+        
         _safeMint(to, tokenId, "");
 
         return address(new_hat);
     }
 
+    function safeTransferToStudent(address from, address to, uint256 tokenId) public{
+        Gestione_Esami ge = Gestione_Esami(managerContract);
+
+        //Recupero la situazione del potenziale acquirente
+        string[] memory examList=ge.getExamList();
+
+        //Recupero la situazione del cappello
+        Smart_Hat hat = Smart_Hat(address(uint160(tokenId)));
+
+        //Verifico la presenza delle spille per gli esami passati
+        require(ge.isGraduated(to) == hat.isGraduatedVersion(), "Hat not compatible with the exams situation of the buyer!");
+
+        for(uint i = 0; i<examList.length; i++){
+            if( (hat.hasPin(examList[i]) != Smart_Hat.pinVersion.NO_PIN) && 
+                (uint(ge.getMyExamState(examList[i])) == uint(Gestione_Esami.examState.TO_DO))
+                )
+                revert("Hat not compatible with the exams situation of the buyer!");
+        }
+
+        safeTransferFrom(from,to,tokenId,"");
+    }
 
     //-----Funzioni per la gestione degli indirizzi-----
-    function addressToInt(address index) public pure returns(uint){
+    function addressToInt(address index) internal pure returns(uint){
         return uint(uint160(index));
     }
     
-    function intToAddress(uint index) public pure returns (address){
+    function intToAddress(uint index) internal pure returns (address){
         return address(uint160(index));
     }
 }
