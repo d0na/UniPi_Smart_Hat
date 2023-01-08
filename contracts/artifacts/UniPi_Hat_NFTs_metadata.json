@@ -640,11 +640,11 @@
 			]
 		},
 		"contracts/UniPi_Hat_NFTs.sol": {
-			"keccak256": "0x3ca9a8a6ea3e111c2ab91526246cf3d305c9c1edb2536af9781591aae2912503",
+			"keccak256": "0x849bf847180197389264984bc52f54bbe27ed9b2a1a4440a80437684c682f959",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://521158fd0ab8652505a3a61320e59ea09b384c6f7adb3855fc1a950468307afe",
-				"dweb:/ipfs/QmPsSx9r61d4byhaDoLv6ZxeegYSQjRM1SfjgVB3uc7UEv"
+				"bzz-raw://273aaf6f892cfa1a33d37d1f34592a7d119b723184ba2fe50856a0562eb3c71d",
+				"dweb:/ipfs/QmY5Gpo8ueKxwoi9ZZZMpQnvKpVfHKzdk5wkGDgucUA58a"
 			]
 		},
 		"hardhat/console.sol": {

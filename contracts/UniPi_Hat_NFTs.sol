@@ -19,7 +19,7 @@ contract UniPi_Hat_NFTs is ERC721, Ownable {
     * @param Il tokenId del token di cui vogliamo ottenere la URI
     * @returns La stringa contenente la URI richiesta
     */
-    function tokenURI(uint256 tokenId) public view override returns (string memory) {
+    function tokenURI(uint256 tokenId) public view override onlyOwner returns (string memory) {
         _requireMinted(tokenId);
         
         //Recupero l'indirizzo del contratto
@@ -36,7 +36,7 @@ contract UniPi_Hat_NFTs is ERC721, Ownable {
     * @returns L'indirizzo del contratto Smart_Hat che rappresenta il nuovo cappellino creato.
     * @returns L'id del token creato
     */
-    function mint(address to) public returns (address,uint){
+    function mint(address to) public onlyOwner returns (address,uint){
         require(to == address(to), "Invalid address");
         
         //Creo un nuovo cappellino passando l'indirizzo di questo contratto come manager.
@@ -61,7 +61,7 @@ contract UniPi_Hat_NFTs is ERC721, Ownable {
     * @param Indirizzo 'to' del potenziale acquirente del cappellino
     * @param Id del cappellino oggetto del trasferimento
     */
-    function safeTransferToStudent(address from, address to, uint256 tokenId) public{
+    function safeTransferToStudent(address from, address to, uint256 tokenId) public onlyOwner {
         Gestione_Esami ge = Gestione_Esami(managerContract);
 
         //Recupera la situazione del potenziale acquirente
