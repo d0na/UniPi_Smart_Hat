@@ -13,7 +13,7 @@ contract Smart_Hat {
     string[] supportedExams;
 
     //Costanti relative all'hash ipfs delle cartelle contenenti i modelli
-    string constant StandardHat = "QmfHYFuzPLNvrGJ76xUY7y1fS9Z5wqAxNCAz5J5jsA522A";
+    string constant StandardHat = "QmRbC6AW5Vv714J7ygJmToesLAK5tmcf7uVR4QU67c2mby";
     string constant GraduatedHat = "QmV3E1VUg9tUymRuoR7Couf8VwHtrasFFwE24B2DS75T2F";
 
     //Riferimento al contratto utilizzato da UniPi per caricare gli esami superati e le lauree conseguite
@@ -195,9 +195,9 @@ contract Smart_Hat {
         //Determinazione della cartella IPFS nella quale ricercare il modello individuato
         string memory completeURL;
         if(graduatedVersion)
-            completeURL = string(abi.encodePacked("ipfs.io/ifps/",GraduatedHat,"?filename=",Filename));
+            completeURL = string(abi.encodePacked("ipfs://",GraduatedHat,"/",Filename));
         else
-            completeURL = string(abi.encodePacked("ipfs.io/ifps/",StandardHat,"?filename=",Filename));
+            completeURL = string(abi.encodePacked("ipfs://",StandardHat,"/",Filename));
         return completeURL;
     }
 

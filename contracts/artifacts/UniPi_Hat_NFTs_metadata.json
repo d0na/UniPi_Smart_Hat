@@ -632,11 +632,11 @@
 			]
 		},
 		"contracts/Smart_Hat.sol": {
-			"keccak256": "0xaf1f17e818d8a86f142ec2fa235d6dad2fb6afc84909357cb6fc8cea60183187",
+			"keccak256": "0x90fe3a28f004a31ff7abed7e91ad41c38719ed6cafadcfc1efb713357fdcdba2",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://066324fc1fc3f480e8cafc09f1ad53f58a04aed24a313c629511c2544911b5ba",
-				"dweb:/ipfs/QmS3PCEJfFV1RxHfPudrDaqwPNP55FVGYTaTv1r6Fb6smi"
+				"bzz-raw://aa28dee58fc151f541545351d04c66544c99b45897ba42e0f0e3dc24235e127c",
+				"dweb:/ipfs/Qmbrg7n1oHstH5vBV8C8Xdo65v9XmHG7pLNXs2T8dq1j9x"
 			]
 		},
 		"contracts/UniPi_Hat_NFTs.sol": {
