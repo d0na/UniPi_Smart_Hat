@@ -14,7 +14,7 @@ contract Smart_Hat {
 
     //Costanti relative all'hash ipfs delle cartelle contenenti i modelli
     string constant StandardHat = "QmRbC6AW5Vv714J7ygJmToesLAK5tmcf7uVR4QU67c2mby";
-    string constant GraduatedHat = "QmV3E1VUg9tUymRuoR7Couf8VwHtrasFFwE24B2DS75T2F";
+    string constant GraduatedHat = "QmdMK3BJTQwioHD5psf8DkTJMR2vAhEBJv9tBeeTeB7uJe";
 
     //Riferimento al contratto utilizzato da UniPi per caricare gli esami superati e le lauree conseguite
     address public examsManager;
