@@ -184,7 +184,7 @@ contract Smart_Hat {
         //Determinazione del nome del file del modello tridimensionale
         string memory Filename = "";
         if(numberOfPins == 0){
-            Filename = "0";
+            Filename = "00";
         }else{
             for(uint i=0; i<supportedExams.length; i++){
                 Filename = string(abi.encodePacked(Filename,Strings.toString(uint(state[supportedExams[i]]))));
