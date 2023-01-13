@@ -632,19 +632,19 @@
 			]
 		},
 		"contracts/Smart_Hat.sol": {
-			"keccak256": "0x77d02ba96d934c27cbb457482ce04d3e66a44c95a02517b7dee2a03f77769af1",
+			"keccak256": "0x9b59c675297aa7a271ba5e07d03a81b7c60e27d9d0cb7f1a0628d68decdc8baf",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f37ed7e7ddb9b9d07b9a8c89549b223f00d8f6f5a13878217550b7a2968f1e40",
-				"dweb:/ipfs/QmaSGxgkXPMBBPeDtAQs4rB7ucmHrAGeo3kQe5tYgatRLH"
+				"bzz-raw://0ca1b49b3adf59c9b567de4a43d71eb97a696b552f3cc179ba4cae90538fd74c",
+				"dweb:/ipfs/QmeRMfpLPW18sTAbXzuuKZFZxnojZYwsYmKfGB5vbapRNY"
 			]
 		},
 		"contracts/UniPi_Hat_NFTs.sol": {
-			"keccak256": "0x849bf847180197389264984bc52f54bbe27ed9b2a1a4440a80437684c682f959",
+			"keccak256": "0x5d7e6e6e9469880107bedb2425f8f16a52a6d09de628cd2d8dc9c4e7c31beb0e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://273aaf6f892cfa1a33d37d1f34592a7d119b723184ba2fe50856a0562eb3c71d",
-				"dweb:/ipfs/QmY5Gpo8ueKxwoi9ZZZMpQnvKpVfHKzdk5wkGDgucUA58a"
+				"bzz-raw://8e9bda80e34ccfca5f45d9d4619c95f9538d0a3533423dbfcafc4bae75e05efb",
+				"dweb:/ipfs/QmdqgHNzBSqhY53rtAHz7FMP39dYiAwLveA5q1fKzgx7QQ"
 			]
 		},
 		"hardhat/console.sol": {
