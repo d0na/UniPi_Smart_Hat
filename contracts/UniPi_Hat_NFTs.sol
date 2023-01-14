@@ -56,12 +56,14 @@ contract UniPi_Hat_NFTs is ERC721, Ownable {
     /***
     * @notice Funzione per il trasferimento vincolato di un cappellino dall'indirizzo 'from' all'indirizzo 'to'.
     *   Il trasferimento viene approvato solamente se 'to' ha superato tutti gli esami che sono presenti sul cappello
-    *   con una spilla.
+    *   con una spilla. La versione sicura del trasferimento effettua i controlli necessari per evitare il blocco 
+    *   permanente di un token inviato ad un indirizzo di un contratto non abilitato alla ricezione di nft.
     * @param Indirizzo 'from' dell'attuale proprietario del cappellino
     * @param Indirizzo 'to' del potenziale acquirente del cappellino
     * @param Id del cappellino oggetto del trasferimento
+    * @param Spazio per dati aggiuntivi
     */
-    function safeTransferToStudent(address from, address to, uint256 tokenId) public {
+    function safeTransferToStudent(address from, address to, uint256 tokenId, bytes memory data) internal {
         Gestione_Esami ge = Gestione_Esami(managerContract);
 
         //Recupera la situazione del potenziale acquirente
@@ -85,7 +87,56 @@ contract UniPi_Hat_NFTs is ERC721, Ownable {
 
         hat.transferOwnership(to);
         //Chiamata a safeTransferFrom del contratto ERC721
-        safeTransferFrom(from,to,tokenId,"");
+        ERC721.safeTransferFrom(from,to,tokenId,data);
+    }
+
+    /***
+    * @notice Funzione per il trasferimento vincolato di un cappellino dall'indirizzo 'from' all'indirizzo 'to'.
+    *   Il trasferimento viene approvato solamente se 'to' ha superato tutti gli esami che sono presenti sul cappello
+    *   con una spilla.
+    * @param Indirizzo 'from' dell'attuale proprietario del cappellino
+    * @param Indirizzo 'to' del potenziale acquirente del cappellino
+    * @param Id del cappellino oggetto del trasferimento
+    * @param Spazio per dati aggiuntivi
+    */
+    function transferToStudent(address from, address to, uint256 tokenId) internal {
+        Gestione_Esami ge = Gestione_Esami(managerContract);
+
+        //Recupera la situazione del potenziale acquirente
+        string[] memory examList=ge.getExamList();
+
+        //Recupera il contratto del cappello
+        Smart_Hat hat = Smart_Hat(intToAddress(tokenId));
+
+        //Verifica della conformità di versione del cappello (da laureato o standard)
+        require(ge.isGraduated(to) == hat.isGraduatedVersion(), "Hat not compatible with the exams situation of the buyer!");
+
+        //Verifica del superamento da parte di 'to' per gli esami che hanno spille apposte sul cappello
+        for(uint i = 0; i<examList.length; i++){
+            /*Se il cappello presenta una spilla di un esame non superato dal potenziale
+                acquirente l'operazione viene annullata*/
+            if( (hat.hasPin(examList[i]) != Smart_Hat.pinVersion.NO_PIN) && 
+                (uint(ge.getExamState(to,examList[i])) == uint(Gestione_Esami.examState.TO_DO))
+                )
+                revert("Hat not compatible with the exams situation of the buyer!");
+        }
+
+        hat.transferOwnership(to);
+        //Chiamata a safeTransferFrom del contratto ERC721
+        ERC721.transferFrom(from,to,tokenId);
+    }
+
+    //-----Override delle funzioni previste dallo standard per il trasferimento dei token-----
+    function safeTransferFrom(address from, address to, uint256 tokenId) public virtual override {
+        safeTransferToStudent(from,to,tokenId,"");
+    }
+
+     function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory data) public virtual override {
+        safeTransferToStudent(from,to,tokenId,data);
+    }
+
+    function transferFrom(address from, address to, uint256 tokenId) public virtual override {
+        transferToStudent(from,to,tokenId);
     }
 
     //-----Funzioni per la gestione degli indirizzi-----

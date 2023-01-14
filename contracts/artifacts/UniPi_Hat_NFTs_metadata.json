@@ -334,29 +334,6 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "from",
-						"type": "address"
-					},
-					{
-						"internalType": "address",
-						"name": "to",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "tokenId",
-						"type": "uint256"
-					}
-				],
-				"name": "safeTransferToStudent",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
 						"name": "operator",
 						"type": "address"
 					},
@@ -640,11 +617,11 @@
 			]
 		},
 		"contracts/UniPi_Hat_NFTs.sol": {
-			"keccak256": "0x5d7e6e6e9469880107bedb2425f8f16a52a6d09de628cd2d8dc9c4e7c31beb0e",
+			"keccak256": "0xd6ed9d2a65e21500bbc8144d0f3210b8a97a647861b2cc7a8ef78b77349f5ebc",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8e9bda80e34ccfca5f45d9d4619c95f9538d0a3533423dbfcafc4bae75e05efb",
-				"dweb:/ipfs/QmdqgHNzBSqhY53rtAHz7FMP39dYiAwLveA5q1fKzgx7QQ"
+				"bzz-raw://e4affdff528c8a93e162611202651a37cdf2d0f2124dfca1f07c70a09a711fd7",
+				"dweb:/ipfs/QmdM5jLvtqn6kWv6vZLoFFbGvj7bqXgMP9uTBL25NQ6yfs"
 			]
 		},
 		"hardhat/console.sol": {
