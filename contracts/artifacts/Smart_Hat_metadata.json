@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.7+commit.e28d00a7"
+		"version": "0.8.17+commit.8df45f5f"
 	},
 	"language": "Solidity",
 	"output": {
@@ -53,7 +53,7 @@
 						"type": "string"
 					}
 				],
-				"name": "aggiungi_spilla_argentata",
+				"name": "addGoldenPin",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -66,14 +66,7 @@
 						"type": "string"
 					}
 				],
-				"name": "aggiungi_spilla_dorata",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "cambia_aspetto_cappello_da_laureato",
+				"name": "addSilverPin",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -93,7 +86,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "crea_cappellino",
+				"name": "createHat",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -218,6 +211,13 @@
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "updateToGraduated",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -288,11 +288,11 @@
 			]
 		},
 		"contracts/Smart_Hat.sol": {
-			"keccak256": "0x9b59c675297aa7a271ba5e07d03a81b7c60e27d9d0cb7f1a0628d68decdc8baf",
+			"keccak256": "0xaad1706504dc35847d8eccae749c7879c6aa21bbf7e00b4dc38c6c020451fa7d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://0ca1b49b3adf59c9b567de4a43d71eb97a696b552f3cc179ba4cae90538fd74c",
-				"dweb:/ipfs/QmeRMfpLPW18sTAbXzuuKZFZxnojZYwsYmKfGB5vbapRNY"
+				"bzz-raw://676a4f631e8c23a895be17f21dcd72152a11d0e1d5317a611f478ad046a8e3f6",
+				"dweb:/ipfs/QmVC49mJiBWDsDxcvCxq7FeC3dVqu6bX2Q4dYFN35F1dfG"
 			]
 		},
 		"hardhat/console.sol": {

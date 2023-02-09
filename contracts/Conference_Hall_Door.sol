@@ -4,11 +4,11 @@ import "hardhat/console.sol";
 import "./Smart_Hat.sol";
 
 contract Conference_Hall_Door {
-
     /***
-    * @notice The function checks the access conditions of the caller user.
-    * @return Returns true if the callers has the access to the seminar reserved
-    *    for graduated students.
+    * @notice Controllo delle condizioni di accesso alla sala seminari.
+    * @param L'indirizzo del cappello che l'utente indossa all'ingresso della sala.
+    * @return Restituisce true se lo studente ha accesso al seminario, ovvero se
+    * il cappello è di sua proprietà ed è in versione da laureato.
     ***/
     function checkAccess(address hatAddress) public view returns (bool){
         Smart_Hat hat = Smart_Hat(hatAddress);

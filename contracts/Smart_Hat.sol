@@ -60,7 +60,7 @@ contract Smart_Hat {
     * @return Il numero di spille applicate al cappello ed un booleano che indica se il cappello
     *   è in versione da laureato.
     ***/
-    function crea_cappellino() public onlyOwner returns (uint pinsNum, bool) {
+    function createHat() public onlyOwner returns (uint pinsNum, bool) {
         require(!initialized, "Hat already initialized");
 
         //Ottengo lo stato degli esami dell'indirizzo chiamante
@@ -93,7 +93,7 @@ contract Smart_Hat {
     *   Solo il creatore del cappellino può chiamare questa funzione.
     * @param Una stringa che rappresenta il codice dell'esame di cui vogliamo aggiungere la spilla.
     ***/
-    function aggiungi_spilla_argentata(string memory exam_code) public onlyOwner{
+    function addSilverPin(string memory exam_code) public onlyOwner{
         //Controllo cappello inizializzato
         require(initialized, "Hat not initialized");
 
@@ -125,7 +125,7 @@ contract Smart_Hat {
     *   Solo il creatore del cappellino può chiamare questa funzione.
     * @param Una stringa che rappresenta il codice dell'esame di cui vogliamo aggiungere la spilla.
     ***/
-    function aggiungi_spilla_dorata(string memory exam_code) public onlyOwner{
+    function addGoldenPin(string memory exam_code) public onlyOwner{
         //Controllo cappello inizializzato
         require(initialized, "Hat not initialized");
 
@@ -157,7 +157,7 @@ contract Smart_Hat {
     *   manterrà tutte le spille aggiunte in precedenza. Solo il creatore del cappellino può chiamare
     *   questa funzione.
     ***/
-    function cambia_aspetto_cappello_da_laureato() public onlyOwner{
+    function updateToGraduated() public onlyOwner{
         //Controllo inizializzazione
         require(initialized, "Hat not initialized");
 
@@ -241,13 +241,17 @@ contract Smart_Hat {
     }
 
     /**
-     * @dev Throws if called by any account other than the owner.
+     * @dev Interrompe l'esecuzione se la funzione è chiamata da un account che non è proprietario.
      */
     modifier onlyOwner() {
         require(msg.sender == currentOwner, "Caller is not the owner");
         _;
     }
 
+    /**
+     * @dev Interrompe l'esecuzione se la funzione è chiamata da un account diverso dal contratto
+     * di gestione esami dell'università.
+     */
     modifier onlyUniPi(){
         require(msg.sender == collectionContract, "Caller is not the owner");
         _;

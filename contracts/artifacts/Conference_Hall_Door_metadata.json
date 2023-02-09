@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.7+commit.e28d00a7"
+		"version": "0.8.17+commit.8df45f5f"
 	},
 	"language": "Solidity",
 	"output": {
@@ -46,7 +46,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
@@ -77,11 +77,11 @@
 			]
 		},
 		"contracts/Conference_Hall_Door.sol": {
-			"keccak256": "0x590de4ffa6475cc272a2c546f9e9459e4f0699a2642aa908e7890c2a55eabcc2",
+			"keccak256": "0x8f9a10295d9228af939f26f5ff761511ab581b50fee62b1121a84653b0292063",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://74a0c6bc1acdeb820f2f7dcc8db64b96d86e85b9d4de603cb5b84931149aebf4",
-				"dweb:/ipfs/Qmd645Qwt6birDfCKYcVnLsi5hdGTH73pb2Jom8bned9bJ"
+				"bzz-raw://3330c0e67a2d4d8c1bb6f4de236847983e08e0d74e2a080b25552bccaf08e7b8",
+				"dweb:/ipfs/QmT2bDXZDWAZbbubv4YxoezuBFTAs8jtFyVeii2PCxoh9s"
 			]
 		},
 		"contracts/Gestione_Esami.sol": {
@@ -101,11 +101,11 @@
 			]
 		},
 		"contracts/Smart_Hat.sol": {
-			"keccak256": "0x9b59c675297aa7a271ba5e07d03a81b7c60e27d9d0cb7f1a0628d68decdc8baf",
+			"keccak256": "0xaad1706504dc35847d8eccae749c7879c6aa21bbf7e00b4dc38c6c020451fa7d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://0ca1b49b3adf59c9b567de4a43d71eb97a696b552f3cc179ba4cae90538fd74c",
-				"dweb:/ipfs/QmeRMfpLPW18sTAbXzuuKZFZxnojZYwsYmKfGB5vbapRNY"
+				"bzz-raw://676a4f631e8c23a895be17f21dcd72152a11d0e1d5317a611f478ad046a8e3f6",
+				"dweb:/ipfs/QmVC49mJiBWDsDxcvCxq7FeC3dVqu6bX2Q4dYFN35F1dfG"
 			]
 		},
 		"hardhat/console.sol": {
